@@ -68,7 +68,6 @@ toc:
       - forge
       - decodeRawBytes
       - encodeRawBytes
-      - calculateFee
 
   - name: forge
     children:

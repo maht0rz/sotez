@@ -23113,8 +23113,8 @@ forge.bool = function (bool) {
 /**
  * @description Forge script bytes
  * @param {Object} script Script to forge
- * @param {Object} script.code Script code
- * @param {Object} script.storage Script storage
+ * @param {String} script.code Script code
+ * @param {String} script.storage Script storage
  * @returns {String} Forged script bytes
  */
 
@@ -23230,7 +23230,7 @@ forge.publicKey = function (pk) {
 };
 /**
  * @description Forge operation bytes
- * @param {Number} op Operation to forge
+ * @param {Object} op Operation to forge
  * @returns {String} Forged operation bytes
  */
 
@@ -23567,7 +23567,7 @@ tezos.decodeRawBytes = function (bytes) {
 /**
  * @description Encode raw bytes
  * @param {Object} input The value to encode
- * @returns {Object} Encoded value as bytes
+ * @returns {String} Encoded value as bytes
  */
 
 
@@ -23646,18 +23646,6 @@ tezos.encodeRawBytes = function (input) {
   };
 
   return rec(input).toUpperCase();
-};
-/**
- * @description Calculate transaction fee based on operation inputs. WIP!
- * @param  {Number} numOfOps Number of operations in the transaction
- * @param  {Number} amount   The amount total amount being sent
- * @param  {Number} counter  The current counter of the sender
- * @return {Number}          The calculated transaction fee
- */
-
-
-tezos.calculateFee = function (numOfOps, amount, counter) {
-  return Math.ceil(198 / numOfOps) + 1071 + (Math.floor(Math.log2(amount) / 7) + 1) + (Math.floor(Math.log2(counter) / 7) + 1);
 };
 
 var rpc = {};
@@ -23835,7 +23823,7 @@ rpc.call = function (path, payload) {
 /**
  * @description Send an operation
  * @param {Object} paramObject The parameters for the operation
- * @param {Object} paramObject.from The address sending the operation
+ * @param {String} paramObject.from The address sending the operation
  * @param {Object|Array} paramObject.operation The operation to include in the transaction
  * @param {Object|Boolean} [paramObject.keys=false] The keys for which to originate the account
  * @param {Boolean} [paramObject.skipPrevalidation=false] Skip prevalidation before injecting operation
@@ -24075,7 +24063,7 @@ rpc.sendOperation = function (_ref19) {
 /**
  * @description Inject an operation
  * @param {Object} opOb The operation object
- * @param {Object} sopbytes The signed operation bytes
+ * @param {String} sopbytes The signed operation bytes
  * @returns {Promise} Object containing the injected operation hash
  */
 
@@ -24118,7 +24106,7 @@ rpc.inject = function (opOb, sopbytes) {
 };
 /**
  * @description Inject an operation without prevalidation
- * @param {Object} sopbytes The signed operation bytes
+ * @param {String} sopbytes The signed operation bytes
  * @returns {Promise} Object containing the injected operation hash
  */
 
@@ -24350,7 +24338,7 @@ function () {
 /**
  * @description Set a delegate for an account
  * @param {Object} paramObject The parameters for the operation
- * @param {Object} paramObject.from The address sending the operation
+ * @param {String} paramObject.from The address sending the operation
  * @param {Object} [paramObject.keys] The keys for which to originate the account. If using a ledger, this is optional
  * @param {String} [paramObject.delegate] The delegate for the new account
  * @param {Number} [paramObject.fee=1278] The fee to set for the transaction
@@ -28250,7 +28238,7 @@ module.exports.makeKey = makeKey
 /* 410 */
 /***/ (function(module) {
 
-module.exports = {"_from":"elliptic@^6.0.0","_id":"elliptic@6.4.1","_inBundle":false,"_integrity":"sha512-BsXLz5sqX8OHcsh7CqBMztyXARmGQ3LWPtGjJi6DiJHq5C/qvi9P3OqgswKSDftbu8+IoI/QDTAm2fFnQ9SZSQ==","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"elliptic@^6.0.0","name":"elliptic","escapedName":"elliptic","rawSpec":"^6.0.0","saveSpec":null,"fetchSpec":"^6.0.0"},"_requiredBy":["/browserify-sign","/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz","_shasum":"c2d0b7776911b86722c632c3c06c60f2f819939a","_spec":"elliptic@^6.0.0","_where":"/Users/akishino/workspace/sotez/node_modules/browserify-sign","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"bundleDependencies":false,"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"deprecated":false,"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.1"};
+module.exports = {"_from":"elliptic@^6.0.0","_id":"elliptic@6.4.1","_inBundle":false,"_integrity":"sha512-BsXLz5sqX8OHcsh7CqBMztyXARmGQ3LWPtGjJi6DiJHq5C/qvi9P3OqgswKSDftbu8+IoI/QDTAm2fFnQ9SZSQ==","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"elliptic@^6.0.0","name":"elliptic","escapedName":"elliptic","rawSpec":"^6.0.0","saveSpec":null,"fetchSpec":"^6.0.0"},"_requiredBy":["/browserify-sign","/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz","_shasum":"c2d0b7776911b86722c632c3c06c60f2f819939a","_spec":"elliptic@^6.0.0","_where":"/Users/andrewkishino/Workspace/sotez/node_modules/browserify-sign","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"bundleDependencies":false,"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"deprecated":false,"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.1"};
 
 /***/ }),
 /* 411 */

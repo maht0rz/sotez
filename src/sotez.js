@@ -957,8 +957,8 @@ forge.bool = bool => (bool ? 'ff' : '00');
 /**
  * @description Forge script bytes
  * @param {Object} script Script to forge
- * @param {Object} script.code Script code
- * @param {Object} script.storage Script storage
+ * @param {String} script.code Script code
+ * @param {String} script.storage Script storage
  * @returns {String} Forged script bytes
  */
 forge.script = (script) => {
@@ -1051,7 +1051,7 @@ forge.publicKey = (pk) => {
 
 /**
  * @description Forge operation bytes
- * @param {Number} op Operation to forge
+ * @param {Object} op Operation to forge
  * @returns {String} Forged operation bytes
  */
 forge.op = (op) => {
@@ -1295,7 +1295,7 @@ tezos.decodeRawBytes = (bytes) => {
 /**
  * @description Encode raw bytes
  * @param {Object} input The value to encode
- * @returns {Object} Encoded value as bytes
+ * @returns {String} Encoded value as bytes
  */
 tezos.encodeRawBytes = (input) => {
   const rec = (inputArg) => {
@@ -1365,17 +1365,6 @@ tezos.encodeRawBytes = (input) => {
 
   return rec(input).toUpperCase();
 };
-
-/**
- * @description Calculate transaction fee based on operation inputs. WIP!
- * @param  {Number} numOfOps Number of operations in the transaction
- * @param  {Number} amount   The amount total amount being sent
- * @param  {Number} counter  The current counter of the sender
- * @return {Number}          The calculated transaction fee
- */
-tezos.calculateFee = (numOfOps, amount, counter) => (
-  Math.ceil(198 / numOfOps) + 1071 + (Math.floor((Math.log2(amount) / 7)) + 1) + (Math.floor((Math.log2(counter) / 7)) + 1)
-);
 
 const rpc = {};
 /**
@@ -1489,7 +1478,7 @@ rpc.call = (path, payload) => node.query(path, payload);
 /**
  * @description Send an operation
  * @param {Object} paramObject The parameters for the operation
- * @param {Object} paramObject.from The address sending the operation
+ * @param {String} paramObject.from The address sending the operation
  * @param {Object|Array} paramObject.operation The operation to include in the transaction
  * @param {Object|Boolean} [paramObject.keys=false] The keys for which to originate the account
  * @param {Boolean} [paramObject.skipPrevalidation=false] Skip prevalidation before injecting operation
@@ -1628,7 +1617,7 @@ rpc.sendOperation = ({
 /**
  * @description Inject an operation
  * @param {Object} opOb The operation object
- * @param {Object} sopbytes The signed operation bytes
+ * @param {String} sopbytes The signed operation bytes
  * @returns {Promise} Object containing the injected operation hash
  */
 rpc.inject = (opOb, sopbytes) => {
@@ -1660,7 +1649,7 @@ rpc.inject = (opOb, sopbytes) => {
 
 /**
  * @description Inject an operation without prevalidation
- * @param {Object} sopbytes The signed operation bytes
+ * @param {String} sopbytes The signed operation bytes
  * @returns {Promise} Object containing the injected operation hash
  */
 rpc.silentInject = sopbytes => node.query('/injection/operation', sopbytes).then(hash => ({ hash }));
@@ -1804,7 +1793,7 @@ rpc.originate = async ({
 /**
  * @description Set a delegate for an account
  * @param {Object} paramObject The parameters for the operation
- * @param {Object} paramObject.from The address sending the operation
+ * @param {String} paramObject.from The address sending the operation
  * @param {Object} [paramObject.keys] The keys for which to originate the account. If using a ledger, this is optional
  * @param {String} [paramObject.delegate] The delegate for the new account
  * @param {Number} [paramObject.fee=1278] The fee to set for the transaction
